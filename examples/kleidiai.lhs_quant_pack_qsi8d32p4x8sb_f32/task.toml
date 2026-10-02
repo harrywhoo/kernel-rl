@@ -1,0 +1,20 @@
+id = "kleidiai.lhs_quant_pack_qsi8d32p4x8sb_f32"
+schema_version = 1
+
+[source]
+kind = "translation"
+repo = "https://github.com/ARM-software/kleidiai"
+commit = "5147983e14600ce7f8a6583dc04ba07753ac54c4"
+license = "Apache-2.0"
+reference = { file = "test/reference/quantize.cpp and pack.cpp", symbol = "quantize_symmetric / pack helpers, ported to the qsi8d32p4x8sb layout" }
+gold = { file = "kai/ukernels/matmul/pack/kai_lhs_quant_pack_qsi8d32p4x8sb_f32_neon.c", symbol = "kai_run_lhs_quant_pack_qsi8d32p4x8sb_f32_neon" }
+
+[kernel]
+signature = "void lhs_quant_pack_qsi8d32p4x8sb_f32(size_t m, size_t k, size_t bl, size_t mr, size_t kr, size_t sr, size_t m_idx_start, const float* lhs, size_t lhs_stride, void* lhs_packed)"
+ref_symbol = "lhs_quant_pack_qsi8d32p4x8sb_f32_ref"
+opt_symbol = "lhs_quant_pack_qsi8d32p4x8sb_f32_opt"
+target_isa = "neon"
+precision = "exact"
+
+[build]
+cflags = ["-O3", "-std=gnu11", "-march=armv8.2-a+fp16"]

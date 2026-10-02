@@ -1,0 +1,20 @@
+id = "libyuv.ARGBAttenuateRow"
+schema_version = 1
+
+[source]
+kind = "translation"
+repo = "https://chromium.googlesource.com/libyuv/libyuv"
+commit = "2124173f34062726761163018f79df085d911460"
+license = "BSD-3-Clause"
+reference = { file = "source/row_common.cc", symbol = "ARGBAttenuateRow_C" }
+gold = { file = "source/row_neon64.cc", symbol = "ARGBAttenuateRow_NEON", wrapper = "source/row_any.cc:ANY11 (tail handled in scalar)" }
+
+[kernel]
+signature = "void ARGBAttenuateRow(const uint8_t* src_argb, uint8_t* dst_argb, int width)"
+ref_symbol = "ARGBAttenuateRow_ref"
+opt_symbol = "ARGBAttenuateRow_opt"
+target_isa = "neon"
+precision = "exact"
+
+[build]
+cflags = ["-O3", "-std=gnu11"]

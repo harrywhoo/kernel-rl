@@ -1,0 +1,48 @@
+{
+  "task_id": "kleidiai.lhs_quant_pack_qsi8d32p4x8sb_f32",
+  "verdict": "PASS",
+  "checks": [
+    {
+      "check": "identity",
+      "level": "ok",
+      "detail": "speedup 0.999"
+    },
+    {
+      "check": "probe-noop",
+      "level": "ok",
+      "detail": ""
+    },
+    {
+      "check": "probe-perturb",
+      "level": "ok",
+      "detail": ""
+    },
+    {
+      "check": "noise",
+      "level": "ok",
+      "detail": "max CV 0.016"
+    },
+    {
+      "check": "coverage",
+      "level": "ok",
+      "detail": "5 timed, 9 correctness-only"
+    },
+    {
+      "check": "gold",
+      "level": "ok",
+      "detail": "gold 6.04x"
+    }
+  ],
+  "proxies": {
+    "max_cv": 0.0161632,
+    "ref_ns": {
+      "prefill_m32_k4096_bl32": 68006.9,
+      "batch_m128_k4096_bl32": 273102,
+      "mlp_m8_k11008_bl32": 46047.8,
+      "repo_m77_k288_bl32": 11556.4,
+      "wide_block_m32_k4096_bl128": 91345.7
+    },
+    "gold_speedup": 6.04367,
+    "reference_loc": 59
+  }
+}

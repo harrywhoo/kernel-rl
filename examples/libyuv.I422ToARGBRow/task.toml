@@ -1,0 +1,20 @@
+id = "libyuv.I422ToARGBRow"
+schema_version = 1
+
+[source]
+kind = "translation"
+repo = "https://chromium.googlesource.com/libyuv/libyuv"
+commit = "2124173f34062726761163018f79df085d911460"
+license = "BSD-3-Clause"
+reference = { file = "source/row_common.cc", symbol = "I422ToARGBRow_C" }
+gold = { file = "source/row_neon64.cc", symbol = "I422ToARGBRow_NEON", wrapper = "source/row_any.cc ANY31C(I422ToARGBRow_Any_NEON, I422ToARGBRow_NEON, 1, 0, 4, 7): libyuv only calls the NEON kernel for width rounded down to a multiple of 8 and reproduces the remainder via a padded-buffer re-invocation; gold.c instead computes the tail with the reference's own fixed point formula, which is equivalent since the NEON and C paths are bit-exact by design" }
+
+[kernel]
+signature = "void I422ToARGBRow(const uint8_t* src_y, const uint8_t* src_u, const uint8_t* src_v, uint8_t* rgb_buf, const struct YuvConstants* yuvconstants, int width)"
+ref_symbol = "I422ToARGBRow_ref"
+opt_symbol = "I422ToARGBRow_opt"
+target_isa = "neon"
+precision = "exact"
+
+[build]
+cflags = ["-O3", "-std=gnu11"]

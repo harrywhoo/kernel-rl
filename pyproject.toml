@@ -1,0 +1,17 @@
+[project]
+name = "kernelrl"
+version = "0.0.1"
+requires-python = ">=3.11"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["kernelrl"]
+
+[tool.setuptools.package-data]
+kernelrl = ["harness/*.c", "harness/*.h", "prompts/*.md", "prompts/sources/*.md"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

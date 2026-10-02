@@ -1,0 +1,47 @@
+{
+  "task_id": "libyuv.ARGBAttenuateRow",
+  "verdict": "PASS",
+  "checks": [
+    {
+      "check": "identity",
+      "level": "ok",
+      "detail": "speedup 1.006"
+    },
+    {
+      "check": "probe-noop",
+      "level": "ok",
+      "detail": ""
+    },
+    {
+      "check": "probe-perturb",
+      "level": "ok",
+      "detail": ""
+    },
+    {
+      "check": "noise",
+      "level": "ok",
+      "detail": "max CV 0.028"
+    },
+    {
+      "check": "coverage",
+      "level": "ok",
+      "detail": "4 timed, 4 correctness-only"
+    },
+    {
+      "check": "gold",
+      "level": "ok",
+      "detail": "gold 5.08x"
+    }
+  ],
+  "proxies": {
+    "max_cv": 0.0281234,
+    "ref_ns": {
+      "w1280": 642.438,
+      "w1920": 974.519,
+      "w3840": 1937.85,
+      "w1923_tail": 976.349
+    },
+    "gold_speedup": 5.07599,
+    "reference_loc": 35
+  }
+}

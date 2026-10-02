@@ -1,0 +1,48 @@
+{
+  "task_id": "libyuv.I422ToARGBRow",
+  "verdict": "WARN",
+  "checks": [
+    {
+      "check": "identity",
+      "level": "ok",
+      "detail": "speedup 1.000"
+    },
+    {
+      "check": "probe-noop",
+      "level": "ok",
+      "detail": ""
+    },
+    {
+      "check": "probe-perturb",
+      "level": "ok",
+      "detail": ""
+    },
+    {
+      "check": "noise",
+      "level": "warn",
+      "detail": "max CV 0.091"
+    },
+    {
+      "check": "coverage",
+      "level": "ok",
+      "detail": "5 timed, 6 correctness-only"
+    },
+    {
+      "check": "gold",
+      "level": "ok",
+      "detail": "gold 2.69x"
+    }
+  ],
+  "proxies": {
+    "max_cv": 0.0914101,
+    "ref_ns": {
+      "w1280_i601": 564.43,
+      "w1920_i601": 840.909,
+      "w3840_i601": 1693.04,
+      "w1280_jpeg": 566.24,
+      "w1923_tail_i601": 867.862
+    },
+    "gold_speedup": 2.68617,
+    "reference_loc": 64
+  }
+}

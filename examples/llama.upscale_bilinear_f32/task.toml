@@ -1,0 +1,21 @@
+id = "llama.upscale_bilinear_f32"
+schema_version = 1
+
+[source]
+kind = "current"
+repo = "https://github.com/ggml-org/llama.cpp"
+commit = "f805c57a2d0b7cc171e599303ce2040f6e1bfe15"
+license = "MIT"
+reference = { file = "ggml/src/ggml-cpu/ops.cpp", symbol = "ggml_compute_forward_upscale_f32" }
+headroom_note = "The inner i0 loop reads 4 taps per output pixel with a purely arithmetic weight computation and no data-dependent branching (only fixed clamps), so it vectorizes directly with NEON (gather 4 lanes of weights/indices, fmla-accumulate); ggml already ships dedicated GPU/SYCL/CUDA upscale kernels (ggml-cuda/upscale.cu, ggml-sycl/upscale.cpp, ggml-webgpu wgsl-shaders/upscale.wgsl) while the CPU backend only has this single scalar, per-pixel loop. No NEON version exists in the repo."
+
+[kernel]
+signature = "void upscale_bilinear_f32(const float *src, int64_t ne00, int64_t ne01, int64_t n_planes, float *dst, int64_t ne0, int64_t ne1)"
+ref_symbol = "upscale_bilinear_f32_ref"
+opt_symbol = "upscale_bilinear_f32_opt"
+target_isa = "neon"
+precision = "tolerant"
+tolerance_note = "The reference sums 4 weighted taps as a*(1-dx)*(1-dy) + b*dx*(1-dy) + c*(1-dx)*dy + e*dx*dy. A vectorized candidate may instead compute it as two lerps (top = a+(b-a)*dx, bot = c+(e-c)*dx, val = top+(bot-top)*dy), which is mathematically equal but rounds differently in the last bit or two of the float32 mantissa. atol=rtol=1e-5 covers that reassociation without masking real bugs."
+
+[build]
+cflags = ["-O3", "-std=gnu11"]

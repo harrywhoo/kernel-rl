@@ -1,0 +1,45 @@
+{
+  "task_id": "llama.upscale_bilinear_f32",
+  "verdict": "WARN",
+  "checks": [
+    {
+      "check": "identity",
+      "level": "ok",
+      "detail": "speedup 0.999"
+    },
+    {
+      "check": "probe-noop",
+      "level": "ok",
+      "detail": ""
+    },
+    {
+      "check": "probe-perturb",
+      "level": "ok",
+      "detail": ""
+    },
+    {
+      "check": "noise",
+      "level": "ok",
+      "detail": "max CV 0.015"
+    },
+    {
+      "check": "coverage",
+      "level": "ok",
+      "detail": "3 timed, 6 correctness-only"
+    },
+    {
+      "check": "gold",
+      "level": "warn",
+      "detail": "no gold; headroom unknown"
+    }
+  ],
+  "proxies": {
+    "max_cv": 0.0150205,
+    "ref_ns": {
+      "siglip2_pos_resize_up": 1235150.0,
+      "siglip2_pos_resize_down": 976194,
+      "deepseekocr_relpos": 5872.61
+    },
+    "reference_loc": 43
+  }
+}
